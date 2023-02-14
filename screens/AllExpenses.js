@@ -1,11 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { ExpensesOutput } from "../components/ExpensesOutput/ExpensesOutput";
+import { useSelector } from "react-redux";
+import { LoadingOverlay } from "../components/Ui/LoadingOverlay";
 
 
 export const AllExpenses = () => {
+  const { expenses, loading } = useSelector(state => state)
+
+  if (loading) return (<LoadingOverlay/>)
+
   return (
-    <View>
-      <Text>AllExpenses</Text>
-    </View>
+    <ExpensesOutput
+      expensesPeriod='total'
+      expenses={expenses}
+      fallBackText='No registered expenses found!'
+    />
   )
 }
 
